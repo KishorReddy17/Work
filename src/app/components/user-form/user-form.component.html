@@ -1,0 +1,38 @@
+<div class="container">
+  <form [formGroup]="user">
+   
+
+    <div>
+      <h4>Citizenship and tax ID number(TIN)</h4>
+    <label>Dual citizenship</label>
+      <mat-radio-group  class="example-radio-group" formControlName="dStatus" aria-label="Select an option">
+        <mat-radio-button checked value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div *ngIf="ifDualDialogData">
+      <mat-label>Citizenship Status</mat-label><br>
+      <input type="text" matInput value={{dualDialogData.status}} >
+    </div>
+    <div>
+      <h4>
+        Selection opens a model window to determine citizenship status
+      </h4>
+      <mat-form-field appearance="fill">
+        <mat-label>citizenship status</mat-label>
+        <mat-select  formControlName="country">
+          <mat-option *ngFor="let val of countriesList" [value]="val.value">
+            {{val.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="ifDialogData">
+      <mat-label>Citizenship Status</mat-label><br>
+      <input type="text" matInput value={{dialogData.status}} >
+    </div>
+
+    <div></div>
+
+  </form>
+</div>

@@ -1,0 +1,83 @@
+
+
+
+
+<div class="container">
+    <form [formGroup]="userRegister"> 
+      <label> <span class="text-danger">*</span>Asterisk indicates a required field</label>
+      <br>
+      <label style="font-size:2vw">Ask client: Are u a diplomat, International student/teacher onspecial
+        visa,anemployee of an
+        intrnational organizationor an employee of the world bank?</label>
+  
+        <div>
+          <mat-radio-group class="example-radio-group" formControlName="status" aria-label="Select an option">
+            <mat-radio-button checked value="US Citizen">Yes</mat-radio-button>
+            <mat-radio-button value="Non Resident">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+  
+        <div *ngIf="notInTheList">
+          <mat-form-field  appearance="fill">
+            <mat-label><span color="warn">*</span>Special Id Type</mat-label>
+            <mat-select  formControlName="idType">
+              <mat-option *ngFor="let id of idsList" [value]="id.value">
+                {{id.viewValue}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="userRegister.get('idType').touched">
+              <strong>this field is required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngIf="child2">
+          <h4>Enter the number of Days in US (Including Terrotories)</h4>
+          <div> <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label><span color="warn">*</span>2020</mat-label>
+            <input type="text" matInput formControlName="noOfdaysIn2020">
+            <mat-error *ngIf=" ((userRegister.get('noOfdaysIn2020').touched ||
+            userRegister.get('noOfdaysIn2020').dirty) &&
+            userRegister.get('noOfdaysIn2020').errors)">
+              <mat-error *ngIf="userRegister.get('noOfdaysIn2020').hasError('required')">
+                <strong>this field is required</strong>
+              </mat-error>
+              <mat-error *ngIf="userRegister.get('noOfdaysIn2020').hasError('pattern')">
+                <strong> this field accepts number only</strong>
+              </mat-error>
+  
+            </mat-error>
+  
+          </mat-form-field></div>
+          <div><mat-form-field class="example-full-width" appearance="fill">
+            <mat-label><span color="warn">*</span>2021</mat-label>
+            <input type="text" matInput formControlName="noOfdaysIn2021">
+  
+            <mat-error *ngIf=" ((userRegister.get('noOfdaysIn2021').touched ||
+            userRegister.get('noOfdaysIn2021').dirty) &&
+            userRegister.get('noOfdaysIn2021').errors)">
+              <mat-error *ngIf="userRegister.get('noOfdaysIn2021').hasError('required')">
+                <strong>this field is required</strong>
+              </mat-error>
+  
+              <mat-error *ngIf="userRegister.get('noOfdaysIn2021').hasError('pattern')">
+                <strong> this field accepts number only</strong>
+              </mat-error>
+  
+            </mat-error>
+          </mat-form-field></div>    
+  
+        </div>
+        <div style="    text-align: right;padding: 23px 0;">
+            <div>
+              <button mat-raised-button color="accent"  (click)="reset()"> Revert Back to Previous selection</button>
+              &nbsp;
+              <span>
+  
+                <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="userRegister.value"
+                  [disabled]="!(userRegister.valid)">Save</button>
+              </span>
+            </div>
+          </div>
+    </form>
+  
+  </div>
